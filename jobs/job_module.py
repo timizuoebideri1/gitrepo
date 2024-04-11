@@ -45,4 +45,36 @@ class GitRepoJob(Job):
             self.logger.error("%s failed. Database changes rolled back.", self.__name__)
             raise
 
-register_jobs(GitRepoJob)
+class ExampleJobHookReceiver(JobHookReceiver):
+    class Meta:
+        name = "Example job hook receiver"
+        description = "Validate changes to object serial field"
+
+    def receive_job_hook(self, change, action, changed_object):
+        # return on delete action
+        if action == ObjectChangeActionChoices.ACTION_DELETE:
+            return
+
+        # log diff output
+        snapshots = change.get_snapshots()
+        self.logger.info("DIFF: %s", snapshots["differences"])
+
+        # validate changes to serial field
+        if "serial" in snapshots["differences"]["added"]:
+            old_serial = snapshots["differences"]["removed"]["serial"]
+            new_serial = snapshots["differences"]["added"]["serial"]
+            self.logger.info("%s serial has been changed from %s to %s", changed_object, old_serial, new_serial)
+
+            # Check the new serial is valid and revert if necessary
+            if not self.validate_serial(new_serial):
+                changed_object.serial = old_serial
+                changed_object.save()
+                self.logger.info("%s serial %s was not valid. Reverted to %s", changed_object, new_serial, old_serial)
+
+            self.logger.info("Serial validation completed for %s", changed_object)
+
+    def validate_serial(self, serial):
+        # add business logic to validate serial
+        return False
+
+register_jobs(GitRepoJob, ExampleJobHookReceiver)
