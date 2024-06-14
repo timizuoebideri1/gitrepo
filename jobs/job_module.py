@@ -20,4 +20,4 @@ class GitRepoTrialJob(Job):
         self.logger.info("Im done sleeping")
         
 
-register_jobs(TrialJob)
+register_jobs(GitRepoTrialJob)
