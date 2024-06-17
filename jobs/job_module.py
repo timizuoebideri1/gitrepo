@@ -1,4 +1,5 @@
-from nautobot.apps.jobs import Job, register_jobs
+# from nautobot.apps.jobs import Job
+from nautobot.extras.jobs import Job
 
 class GitRepoTrialJob(Job):
     class Meta:
@@ -18,6 +19,3 @@ class GitRepoTrialJob(Job):
             time.sleep(60)
             self.logger.info(f"I have slept for {i} min")
         self.logger.info("Im done sleeping")
-        
-
-register_jobs(GitRepoTrialJob)
