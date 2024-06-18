@@ -3,7 +3,7 @@ from nautobot.extras.jobs import Job
 
 class GitRepoTrialJob(Job):
     class Meta:
-        name = "Git Repo Trial Jobs 2"
+        name = "Git Repo Trial Jobs 3"
         description = """
             Markdown Formatting
 
