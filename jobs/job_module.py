@@ -9,7 +9,7 @@ class GitRepoTrialJob(Job):
 
             *This is italicized*
         """
-        soft_time_limit = 15 * 60
+        # soft_time_limit = 15 * 60
     
     def run(self):
         # self.logger.debug("Running for %s seconds.", interval)
