@@ -1,5 +1,5 @@
 from nautobot.core.celery import register_jobs
-from gitrepo.jobs.job_module import (GitRepoTrialJob)
+from jobs.job_module import (GitRepoTrialJob)
 
 
 register_jobs(GitRepoTrialJob)
