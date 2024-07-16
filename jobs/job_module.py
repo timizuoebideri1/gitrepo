@@ -9,6 +9,7 @@ class GitRepoTrialJob(Job):
 
             *This is italicized*
         """
+        has_sensitive_variables = False
         # soft_time_limit = 40
         # time_limit = 60
     
