@@ -9,8 +9,8 @@ class GitRepoTrialJob(Job):
 
             *This is italicized*
         """
-        soft_time_limit = 40
-        time_limit = 2 * 60
+        # soft_time_limit = 40
+        # time_limit = 60
     
     def run(self):
         self.logger.debug("Running for seconds.")
@@ -18,5 +18,5 @@ class GitRepoTrialJob(Job):
         import time
         for i in range(10):
             time.sleep(5)
-            self.logger.info(f"I have slept for {i + 5} sec")
+            self.logger.info(f"I have slept for {i * 5} sec")
         self.logger.info("Im done sleeping")
