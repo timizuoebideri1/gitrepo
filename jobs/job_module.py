@@ -13,7 +13,7 @@ class GitRepoTrialJob(Job):
         soft_time_limit = 40
         time_limit = 60
     
-    def run(self):
+    def run(self, data=None):
         self.logger.debug("Running for seconds.")
         self.logger.info("Step %s", 4)
         import time
