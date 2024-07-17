@@ -10,8 +10,8 @@ class GitRepoTrialJob(Job):
             *This is italicized*
         """
         has_sensitive_variables = False
-        soft_time_limit = 40
-        time_limit = 60
+        # soft_time_limit = 40
+        # time_limit = 60
     
     def run(self, data=None, commit=None, **kwargs):
         self.logger.debug("Running for seconds.")
