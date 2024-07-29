@@ -10,14 +10,19 @@ class GitRepoTrialJob(Job):
             *This is italicized*
         """
         has_sensitive_variables = False
-        soft_time_limit = 40
-        time_limit = 60
+        soft_time_limit = 4 * 3600
+        time_limit = 4 * 3600
     
     def run(self, data=None, commit=None, **kwargs):
-        self.logger.debug("Running for seconds.")
-        self.logger.info("Step %s", 4)
         import time
-        for i in range(10):
-            time.sleep(5)
-            self.logger.info(f"I have slept for {(i + 1) * 5} sec")
-        self.logger.info("Im done sleeping")
+        ZTP_REDIRECT_MAX_WAIT_MINUTES = 90
+        iterator = iter(range(ZTP_REDIRECT_MAX_WAIT_MINUTES))
+        while True:
+            try:
+                self.logger.info("Logged interval message")
+                time.sleep(60)
+                next(iterator)
+            except StopIteration:
+                self.logger.info("Wait time exceeded")
+                break
+        self.logger.info("Continuing...")
