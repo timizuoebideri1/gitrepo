@@ -11,7 +11,7 @@ class GitRepoTrialJob(Job):
         """
         has_sensitive_variables = False
         soft_time_limit = 4 * 3600
-        time_limit = 4 * 3600
+        time_limit = 5 * 3600
     
     def run(self, data=None, commit=None, **kwargs):
         import time
